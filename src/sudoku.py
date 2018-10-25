@@ -1,13 +1,12 @@
 characters = 'ABCDEFGHI'
 numbers = '123456789'
 
-
 # These two global variables will be used to permutate and index the game board
 # Example: A1, A2, A3,..,B1,B2,B3,...
 
-
 # Sudoku Class
 # Creates an 9x9 board of 81 tiles
+
 
 class Sudoku:
 
@@ -15,6 +14,7 @@ class Sudoku:
         self.variables = list()
         self.domain = dict()
         self.init_game(new_board)
+        self.constraints = list()
 
     def init_game(self, new_board):
         self.create_variables(numbers, characters)
@@ -66,6 +66,43 @@ class Sudoku:
         # 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 
         # 'I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I9']
         
+    def create_constraints(self):
+        rows = list()
+        columns = list()
         
+        # create row constraints
+        for character in characters:
+            temp = list()
+            
+            for number in numbers:
+                
+                temp.append(character+number)
+               
+                
+            rows += temp;
+        
+        self.constraints.append(rows)
+        # testing 
+        for row in rows:
+            print(row)
+        
+        # create column constraints
+        for number in numbers:
+            temp = list()
+            
+            for character in characters:
+                
+                temp.append(number+character)
+                #print(number,character)
+                
+            columns += temp;
+        
+        for column in columns:
+            print(column)
+            
+        
+            
+        
+                
         # THIS IS A TEST
 

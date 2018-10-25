@@ -17,9 +17,11 @@ def main():
     # Print properties for debugging
     print(sudoku.variables)
 
-    for x in sudoku.domain:
-        print(x + ": ", end='')
-        print(sudoku.domain[x])
+    #for x in sudoku.domain:
+    #    print(x + ": ", end='')
+    #    print(sudoku.domain[x])
+        
+    
 
 
 if __name__ == '__main__':
