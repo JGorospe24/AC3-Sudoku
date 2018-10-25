@@ -28,7 +28,7 @@ class Sudoku:
         letter_p = 0
         for x in new_board:
             if (x == 0):
-                self.domain[letter + str((tile_count % 9) + 1)] = range(1, 10)
+                self.domain[letter + str((tile_count % 9) + 1)] = [1, 2, 3, 4, 5, 6, 7 ,8 ,9]
             else:
                 self.domain[letter + str((tile_count % 9) + 1)] = [x]
 
