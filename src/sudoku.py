@@ -78,46 +78,26 @@ class Sudoku:
         # create row constraints
         for character in characters:
             temp = list()
-
             for number in numbers:
                 temp.append(character + number)
-
             rows.append(temp)
 
-        self.constraints.append(rows)
-        # testing 
-        for row in rows:
-            print(row)
-
         # create column constraints
-        print("done rows")  # Testing line
         for number in numbers:
             temp = list()
-
             for character in characters:
                 temp.append(character + number)
-                # print(number,character)
-
             columns.append(temp)
 
-        for column in columns:
-            print(column)
-
+        # create block constraints
         for character in ['ABC', 'DEF', 'GHI']:
-
-            print("The character is: {}".format(character))
             for number in ['123', '456', '789']:
                 temp = list()
-                #print("character: {} number: {}".format(character, number))
                 for letter in character:
-                    #print("Letter: {}".format(letter))
                     for digit in number:
-                        #print("Digit: {}".format(digit))
                         temp.append(letter+digit)
                 blocks.append(temp)
-                
+
         groups.append(columns)
         groups.append(rows)
         groups.append(blocks)
-        for block in blocks:
-            print(block)

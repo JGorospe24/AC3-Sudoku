@@ -11,18 +11,15 @@ def main():
     # Close the text file
 
     # Create the sudoku object
-    sudoku = Sudoku(game_board)
+    board = Sudoku(game_board)
 
     # Print properties for debugging
-    print(sudoku.variables)
+    print(board.variables)
 
-    # for x in sudoku.domain:
-    #    print(x + ": ", end='')
-    #    print(sudoku.domain[x])
-
-    sudoku.create_constraints() #Just for testing right now
-
-
+    #or x in board.domain:
+    #   print(x + ": ", end='')
+    #    print(board.domain[x])
+    #board.create_constraints() #Just for testing right now
 
 if __name__ == '__main__':
     main()
