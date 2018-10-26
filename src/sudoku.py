@@ -1,5 +1,8 @@
+from itertools import permutations
+
 characters = 'ABCDEFGHI'
 numbers = '123456789'
+
 
 # These two global variables will be used to permutate and index the game board
 # Example: A1, A2, A3,..,B1,B2,B3,...
@@ -28,7 +31,7 @@ class Sudoku:
         letter_p = 0
         for x in new_board:
             if (x == 0):
-                self.domain[letter + str((tile_count % 9) + 1)] = [1, 2, 3, 4, 5, 6, 7 ,8 ,9]
+                self.domain[letter + str((tile_count % 9) + 1)] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             else:
                 self.domain[letter + str((tile_count % 9) + 1)] = [x]
 
@@ -65,39 +68,56 @@ class Sudoku:
         # 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 
         # 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 
         # 'I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I9']
-        
+
     def create_constraints(self):
         rows = list()
         columns = list()
-        
+        blocks = list()
+        groups = list()
+
         # create row constraints
         for character in characters:
             temp = list()
-            
+
             for number in numbers:
-                
-                temp.append(character+number)
+                temp.append(character + number)
 
             rows.append(temp)
-        
+
         self.constraints.append(rows)
         # testing 
         for row in rows:
             print(row)
-            print("One Row") #Testing line
-        
+
         # create column constraints
-        print("done rows") #Testing line
+        print("done rows")  # Testing line
         for number in numbers:
             temp = list()
-            
+
             for character in characters:
-                
-                temp.append(character+number)
-                #print(number,character)
-                
+                temp.append(character + number)
+                # print(number,character)
+
             columns.append(temp)
-        
+
         for column in columns:
             print(column)
-            print("One column") #Testing line
+
+        for character in ['ABC', 'DEF', 'GHI']:
+
+            print("The character is: {}".format(character))
+            for number in ['123', '456', '789']:
+                temp = list()
+                #print("character: {} number: {}".format(character, number))
+                for letter in character:
+                    #print("Letter: {}".format(letter))
+                    for digit in number:
+                        #print("Digit: {}".format(digit))
+                        temp.append(letter+digit)
+                blocks.append(temp)
+                
+        groups.append(columns)
+        groups.append(rows)
+        groups.append(blocks)
+        for block in blocks:
+            print(block)

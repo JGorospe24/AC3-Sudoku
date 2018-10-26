@@ -1,6 +1,5 @@
 from sudoku import Sudoku
 
-
 def main():
     InputFile = open('sudoku.txt', 'r')
 
@@ -17,11 +16,12 @@ def main():
     # Print properties for debugging
     print(sudoku.variables)
 
-    #for x in sudoku.domain:
+    # for x in sudoku.domain:
     #    print(x + ": ", end='')
     #    print(sudoku.domain[x])
 
     sudoku.create_constraints() #Just for testing right now
+
 
 
 if __name__ == '__main__':
