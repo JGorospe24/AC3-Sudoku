@@ -20,8 +20,8 @@ def main():
     #for x in sudoku.domain:
     #    print(x + ": ", end='')
     #    print(sudoku.domain[x])
-        
-    
+
+    sudoku.create_constraints() #Just for testing right now
 
 
 if __name__ == '__main__':

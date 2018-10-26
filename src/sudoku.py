@@ -77,32 +77,27 @@ class Sudoku:
             for number in numbers:
                 
                 temp.append(character+number)
-               
-                
-            rows += temp;
+
+            rows.append(temp)
         
         self.constraints.append(rows)
         # testing 
         for row in rows:
             print(row)
+            print("One Row") #Testing line
         
         # create column constraints
+        print("done rows") #Testing line
         for number in numbers:
             temp = list()
             
             for character in characters:
                 
-                temp.append(number+character)
+                temp.append(character+number)
                 #print(number,character)
                 
-            columns += temp;
+            columns.append(temp)
         
         for column in columns:
             print(column)
-            
-        
-            
-        
-                
-        # THIS IS A TEST
-
+            print("One column") #Testing line
