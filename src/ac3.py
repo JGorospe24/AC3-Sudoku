@@ -20,34 +20,44 @@ def main():
     #   print(x + ": ", end='')
     #    print(board.domain[x])
 
-    #board.create_constraints() #Just for testing right now
+    # board.create_constraints() #Just for testing right now
     
     board.create_neighbours()
 
     # board.create_constraints() #Just for testing right now
 
+
 if __name__ == '__main__':
     main()
 
-# returns false if domain size = 0 else returns true
+
 def AC3(board):
-    #queue of arcs (initially all constraints)
+    # queue of arcs (initially all constraints)
     arc_queue = board.constraints
     while arc_queue:
         current_arc = arc_queue.pop()
-        if revise(board,current_arc[0],current_arc[1]):
-            #check if D1 is = 0, which means no solution
+        if revise(current_arc[0], current_arc[1]):
+            # check if D1 is = 0, which means no solution
             if not current_arc[0].domain: return False
-            #else for each neighbour of
+            # else for each neighbour of
             for neighbours in current_arc[0].neighbours:
-                #will skip if x2 is found as we do not need this value appended
+                # will skip if x2 is found as we do not need this value appended
                 if neighbours == current_arc[1]:
                     continue
-                temp_list = [neighbours,current_arc[0]]
+                temp_list = [neighbours, current_arc[0]]
                 arc_queue.append(temp_list)
     return True
 
 
 # takes board, current_arc[0](x1) and current_arc[1](x2) as parameters
 # returns true iff domain x1 is revised
+
+def revise(x1, x2):
+    revised = False
+    # check each value in the domain of x1
+    for d in x1.domain:
+        if d in x2.domain:
+            x1.domain.remove(d)  # delete from domain if true
+        revised = True
+    return revised
 

@@ -131,4 +131,5 @@ class Sudoku:
                     self.neighbours[variables].append(constraints[1])
         # testing for neighbours
         print(self.neighbours)
-                    
+
+
