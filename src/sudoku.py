@@ -1,4 +1,4 @@
-from itertools import permutations
+import itertools
 
 characters = 'ABCDEFGHI'
 numbers = '123456789'
@@ -16,12 +16,13 @@ class Sudoku:
     def __init__(self, new_board):
         self.variables = list()
         self.domain = dict()
-        self.init_game(new_board)
         self.constraints = list()
+        self.init_game(new_board)
 
     def init_game(self, new_board):
         self.create_variables(numbers, characters)
         self.populate_domain(new_board)
+        self.create_constraints()
 
     # Populates the domain of all the tiles and sets the domain of already populated tiles from new_board as the value itself
     # Populates the domain of all the tiles and sets the domain of already populated tiles from new_board as the value itself
@@ -98,9 +99,12 @@ class Sudoku:
                         temp.append(letter+digit)
                 blocks.append(temp)
 
-        groups.append(columns)
-        groups.append(rows)
-        groups.append(blocks)
+        #Changed from append
+        groups += columns
+        groups += rows
+        groups += blocks
+
+        print(groups)
 
         # Need to permutate each row, column, and block to induce a constraint list of its neighbours
         for blocks in groups:
@@ -110,7 +114,7 @@ class Sudoku:
                     for pair in itertools.permutations(blocks, x):
                         permutations.append(pair)
             for pair in permutations:
-                if [pair[0],pair[1]] not in self.create_constraints:
-                    self.constraints.append([pair[0], pair[1]])
-                
-        print(self.constraints)
+                if [pair[0],pair[1]] not in self.constraints:
+                    self.constraints.append([pair[0],pair[1]])
+
+       # print(self.constraints)

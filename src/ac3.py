@@ -14,13 +14,7 @@ def main():
     board = Sudoku(game_board)
 
     # Print properties for debugging
-    print(board.variables)
-    print(sudoku.variables)
-
-    for x in sudoku.domain:
-        print(x + ": ")
-        print(sudoku.domain[x])
-
+    #print(board.variables)
     #or x in board.domain:
     #   print(x + ": ", end='')
     #    print(board.domain[x])
