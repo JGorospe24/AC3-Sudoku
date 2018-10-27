@@ -1,7 +1,7 @@
 from sudoku import Sudoku
 
 def main():
-    InputFile = open('sudoku.txt', 'r')
+    InputFile = open("sudoku.txt", "r")
 
     game_board = list()
 
@@ -14,7 +14,18 @@ def main():
     board = Sudoku(game_board)
 
     # Print properties for debugging
+<<<<<<< Updated upstream
     print(board.variables)
+=======
+    print(sudoku.variables)
+
+    for x in sudoku.domain:
+        print(x + ": ", end='')
+        print(sudoku.domain[x])
+
+    sudoku.create_constraints() #Just for testing right now
+
+>>>>>>> Stashed changes
 
     #or x in board.domain:
     #   print(x + ": ", end='')
