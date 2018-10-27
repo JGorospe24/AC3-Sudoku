@@ -129,6 +129,6 @@ class Sudoku:
                 if variables == constraints[0]:
                     
                     self.neighbours[variables].append(constraints[1])
-        #testing
+        #testing for neighbours
         print(self.neighbours)
                     
