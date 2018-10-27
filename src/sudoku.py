@@ -107,10 +107,8 @@ class Sudoku:
         # Need to permutate each row, column, and block to induce a constraint list of its neighbours
         for blocks in groups:
             permutations = list()
-            for x in range(0,len(blocks) + 1):
-                if x == 2:
-                    for pair in itertools.permutations(blocks, x):
-                        permutations.append(pair)
+            for pair in itertools.permutations(blocks, 2):
+                permutations.append(pair)
             for pair in permutations:
                 if [pair[0],pair[1]] not in self.constraints:
                     self.constraints.append([pair[0],pair[1]])
