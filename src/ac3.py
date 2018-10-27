@@ -1,5 +1,6 @@
 from sudoku import Sudoku
 
+
 def main():
     InputFile = open('sudoku.txt', 'r')
 
@@ -19,6 +20,8 @@ def main():
     #   print(x + ": ", end='')
     #    print(board.domain[x])
     #board.create_constraints() #Just for testing right now
+    
+    board.create_neighbours()
 
 if __name__ == '__main__':
     main()
