@@ -104,8 +104,6 @@ class Sudoku:
         groups += rows
         groups += blocks
 
-        print(groups)
-
         # Need to permutate each row, column, and block to induce a constraint list of its neighbours
         for blocks in groups:
             permutations = list()
@@ -117,4 +115,4 @@ class Sudoku:
                 if [pair[0],pair[1]] not in self.constraints:
                     self.constraints.append([pair[0],pair[1]])
 
-       # print(self.constraints)
+        print(self.constraints)
