@@ -101,15 +101,3 @@ class Sudoku:
         groups.append(columns)
         groups.append(rows)
         groups.append(blocks)
-
-        # To create the constraints list, we need to permutate each row, column and block
-        for block in groups:
-            permutations = list()
-            for x in range(0, len(block) + 1):
-                if  x == 2:
-                    for pair in itertools.permutate(block, x):
-                        permutations.append(pair)
-            for pairing in permutations:
-                if [pairing[0],pairing[1]] not in self.constraints:
-                    self.constraints.append([pairing[0], pairing[1]])
-
