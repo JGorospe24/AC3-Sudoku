@@ -132,4 +132,15 @@ class Sudoku:
         # testing for neighbours
         print(self.neighbours)
 
+    # printing the final sudoku solved puzzle
+    def print_sudoku(self):
+        count = 0
+        for variable in self.variables:
+            count += 1
+            if count == 9:
+                count = 0
+                print()  # starts new line
+            print(self.domain(variable))
+
+
 
