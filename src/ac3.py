@@ -45,7 +45,7 @@ def main():
     board = Sudoku(game_board)
 
     # Print properties for debugging
-    # print(board.variables)
+    print(board.neighbours)
     # or x in board.domain:
     #   print(x + ": ", end='')
     #    print(board.domain[x])
@@ -53,10 +53,10 @@ def main():
     
     # board.create_neighbours()
 
-    if not AC3(board):
-        print("No Solution Found")
-    else:
-        Sudoku.print_sudoku(board)
+   # if not AC3(board):
+        #print("No Solution Found")
+    #else:
+        #Sudoku.print_sudoku(board)
 
 
 

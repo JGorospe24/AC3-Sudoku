@@ -23,6 +23,7 @@ class Sudoku:
         self.create_variables(numbers, characters)
         self.populate_domain(new_board)
         self.create_constraints()
+        self.create_neighbours()
 
     # Populates the domain of all the tiles and sets
     # the domain of already populated tiles from new_board as the value itself
