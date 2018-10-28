@@ -2,19 +2,21 @@ from sudoku import Sudoku
 
 def AC3(board):
     # queue of arcs (initially all constraints)
-    arc_queue = board.constraints
+    arc_queue = list(board.constraints)
     while arc_queue:
-        current_arc = arc_queue.pop()
-        if revise(board, current_arc[0], current_arc[1]):
+        arc1,arc2 = arc_queue.pop(0)
+        
+        
+        if revise(board, arc1, arc2):
             # check if D1 is = 0, which means no solution
-            if not board.domain[current_arc[0]]:
+            if not board.domain[arc1]:
                 return False
             # else for each neighbour of
-            for neighbours in board.neighbours[current_arc[0]]:
+            for neighbours in board.neighbours[arc1]:
                 # will skip if x2 is found as we do not need this value appended
-                if neighbours == current_arc[1]:
+                if neighbours == arc2:
                     continue
-                temp_list = [neighbours, current_arc[0]]
+                temp_list = [neighbours, arc1]
                 arc_queue.append(temp_list)
     return True
 
@@ -25,10 +27,12 @@ def AC3(board):
 def revise(board, x1, x2):
     revised = False
     # check each value in the domain of x1
-    for d in board.domain[x1]:
-        if d in board.domain[x2]:
-            del[d]  # delete from domain if true
-        revised = True
+    for x in board.domain[x1]:
+        
+        
+        if not any ([x!=y for y in board.domain[x2]]):
+            board.domain[x1].remove(x)   # delete from domain if true
+            revised = True
     return revised
 
 def main():
@@ -45,25 +49,27 @@ def main():
     board = Sudoku(game_board)
 
     # Print properties for debugging
-    print(board.neighbours)
+    
     # or x in board.domain:
     #   print(x + ": ", end='')
     #    print(board.domain[x])
     # board.create_constraints() #Just for testing right now
     
     # board.create_neighbours()
-
-   # if not AC3(board):
-        #print("No Solution Found")
-    #else:
-        #Sudoku.print_sudoku(board)
+    
+    print(board.neighbours)
+    if not AC3(board):
+        print("No Solution Found")
+    else:
+        #board.print_sudoku()
+        print(" Solution Found")
+        print(board.domain)
 
 
 
 
 if __name__ == '__main__':
     main()
-
 
 
 

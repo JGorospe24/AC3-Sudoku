@@ -20,6 +20,7 @@ class Sudoku:
         self.init_game(new_board)
 
     def init_game(self, new_board):
+        
         self.create_variables(numbers, characters)
         self.populate_domain(new_board)
         self.create_constraints()
@@ -131,7 +132,7 @@ class Sudoku:
                     
                     self.neighbours[variables].append(constraints[1])
         # testing for neighbours
-        print(self.neighbours)
+        
 
     # printing the final sudoku solved puzzle
     def print_sudoku(self):
@@ -142,6 +143,5 @@ class Sudoku:
                 count = 0
                 print()  # starts new line
             print(self.domain(variable))
-
 
 
