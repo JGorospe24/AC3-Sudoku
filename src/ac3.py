@@ -57,13 +57,19 @@ def main():
     
     # board.create_neighbours()
     
-    print(board.neighbours)
+    # print(board.neighbours)
     if not AC3(board):
         print("No Solution Found")
     else:
-        #board.print_sudoku()
-        print(" Solution Found")
-        print(board.domain)
+        print("Solution Found")
+        # print(board.domain)
+        count = 0
+        for x in board.domain:
+            if count == 9:
+                count = 0
+                print()  # starts new line
+            print(board.domain[x], end=" ")
+            count += 1
 
 
 
