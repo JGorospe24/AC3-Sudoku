@@ -21,38 +21,42 @@ def AC3(board):
 
 # takes board, current_arc[0](x1) and current_arc[1](x2) as parameters
 # returns true iff domain x1 is revised
-
-
-def revise(board, x1, x2):
+def revise(board, a, b):
     revised = False
     # check each value in the domain of x1
-    for x in board.domain[x1]:
-        if not any([x != y for y in board.domain[x2]]):
-            board.domain[x1].remove(x)   # delete from domain if true
+    for x in board.domain[a]:
+        if any([x != y for y in board.domain[b]]):
+            revised = False
+        else:
+            board.domain[a].remove(x)   # delete from domain if true
             revised = True
     return revised
 
+def isTheSame(a,b):
+    if len(a) == len(b):
+        return True
+    
+    return False
+    
 
 def backtrack(assignments, board):
-    if len(assignments) == len(board.variables):
+    if isTheSame(assignments, board.variables):
         return assignments
+    
     currentVar = minimum_remaining_values(assignments, board)
+    
+    #First look at the first heuristic Least Constraining Value
     for v in least_constraining_value(currentVar, board):
         if isConsistent(assignments,currentVar, v, board):
-            
             assign(assignments, currentVar, v, board)
-            
             solution = backtrack(assignments, board)
-            
+                        
             if solution:
-                
                 return solution
+            unassign(assignments, currentVar, board)   
             
-            unassign(assignments, currentVar, board)
-            
-            
+    
     return False
-
 
 def define_assigned_vars(board):
     assigned = dict()
@@ -61,74 +65,71 @@ def define_assigned_vars(board):
             assigned[x] = board.domain[x][0]
     return assigned
 
-
 def minimum_remaining_values(assignments, board):
     unassigned = list()
     for x in board.variables:
         if x not in assignments:
             unassigned.append(x)
-    min_var = min(unassigned, key=lambda var: len(board.domain[var]))
+    min_var = min(unassigned, key=lambda tile: len(board.domain[tile]))
     return min_var
 
-
-def least_constraining_value(var, board):
-    if len(board.domain[var]) == 1:
-        return board.domain[var]
-    sorted_domain = sorted(board.domain[var], key=lambda v: constraints(var, v, board))
+def least_constraining_value(tile, board):
+    if len(board.domain[tile]) == 1:
+        return board.domain[tile]
+    sorted_domain = sorted(board.domain[tile], key=lambda v: constraints(tile, v, board))
     return sorted_domain
 
-
-def constraints(var, val, board):
+def constraints(tile, value, board):
     constraints = 0
-    for x in board.neighbours[var]:
+    for x in board.neighbours[tile]:
         if len(board.domain[x]) > 1:
             if x in board.domain[x]:
                 constraints += 1
     return constraints
 
-
-def isConsistent(assignments, var, val, board):
+def isConsistent(assignments, tile, value, board):
     consistent = True
     for key in assignments:
-        if assignments[key] == val:
-            if key in board.neighbours[var]:
+        if assignments[key] == value:
+            if key in board.neighbours[tile]:
                 consistent = False
     return consistent
 
+def assign(assignments, tile, value, board):
+    assignments[tile] = value
+    #Each time we assign a value, we must perform a forward check to update domains of the neighbours
+    forward_check(board, tile, value, assignments)
 
-def assign(assignments, var, val, board):
-
-    assignments[var] = val
-    forward_check(board, var, val, assignments)
-
-
-def unassign(assignments, var, board):
-
-    if var in assignments:
-        for tuple in board.updated[var]:
+def unassign(assignments, tile, board):
+    if tile in assignments:
+        for tuple in board.updated[tile]:
             board.domain[tuple[0]].append(tuple[1])
+        board.updated[tile] = list()
+        del assignments[tile]
 
-        board.updated[var] = []
-        del assignments[var]
 
-
-def forward_check(board, var, value, assignment):
-    for neighbour in board.neighbours[var]:
+def forward_check(board, tile, value, assignment):
+    for neighbour in board.neighbours[tile]:
         if neighbour not in assignment:
             if value in board.domain[neighbour]:
                 board.domain[neighbour].remove(value)
-                board.updated[var].append((neighbour, value))
+                board.updated[tile].append((neighbour, value))
+
+def solved(board):
+    for x in board.domain:        
+        if board.domain[x] == "":
+            return False
+
+    return True
+                
 
 def main():
     InputFile = open('sudoku.txt')
-
     game_board = list()
-
     for line in InputFile:
-        game_board += [int(i) for i in line.split(',')]
+        game_board += [int(i) for i in line.split(' ')]
     # Close the text file
     InputFile.close
-
     # Create the sudoku object
     board = Sudoku(game_board)
 
@@ -137,7 +138,6 @@ def main():
         for tile in board.variables:
             if len(board.domain[tile]) > 1:
                 isSolved = False
-
 
         if(isSolved):
             print("Solution Found")
@@ -159,12 +159,13 @@ def main():
                 count += 1
         else:
             assigned = define_assigned_vars(board)
-
+            
             assignments = backtrack(assigned, board)
-
+            
             for domain in board.domain:
                 board.domain[domain] = assignments[domain] if len(domain) > 1 else board.domain[domain]
 
+        
             print("Solution Found")
             # print(board.domain)
             print("|", end="")
@@ -183,8 +184,7 @@ def main():
                 print("{}|".format(board.domain[x]), end="")
                 count += 1
 
-
-
+                    
 if __name__ == '__main__':
     main()
 
