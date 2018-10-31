@@ -8,8 +8,6 @@ numbers = '123456789'
 
 # Sudoku Class
 # Creates an 9x9 board of 81 tiles
-
-
 class Sudoku:
 
     def __init__(self, new_board):
