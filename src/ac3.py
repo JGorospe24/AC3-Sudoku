@@ -63,12 +63,20 @@ def main():
     else:
         print("Solution Found")
         # print(board.domain)
+        print("|", end="")
         count = 0
+        row = 0
         for x in board.domain:
             if count == 9:
                 count = 0
                 print()  # starts new line
-            print(board.domain[x], end=" ")
+                row += 1
+                if row == 3 or row == 6:
+                    print()
+                print('|', end='')
+            if count == 3 or count == 6:
+                print("  |", end="")
+            print("{}|".format(board.domain[x][0]), end="")
             count += 1
 
 
