@@ -37,8 +37,21 @@ def backtrack(assignments, board):
     if len(assignments) == len(board.variables):
         return assignments
     currentVar = minimum_remaining_values(assignments, board)
-    #for v in least_constraining_value(currentVar, board):
-        #if isConsistent(assignments,currentVar, v, board):
+    for v in least_constraining_value(currentVar, board):
+        if isConsistent(assignments,currentVar, v, board):
+            
+            assign(assignments, currentVar, v, board)
+            
+            solution = backtrack(assignments, board)
+            
+            if solution:
+                
+                return solution
+            
+            unassign(assignments, currentVar, board)
+            
+            
+    return False
 
 
 def define_assigned_vars(board):
@@ -122,7 +135,7 @@ def main():
     if AC3(board):
         print("Solution Found")
         # print(board.domain)
-        print("|", end="")
+        print("|", end=" ")
         count = 0
         row = 0
         for x in board.domain:
@@ -134,11 +147,16 @@ def main():
                     print()
                 print('|', end='')
             if count == 3 or count == 6:
-                print("  |", end="")
+                print("  |", end=" ")
             print("{}|".format(board.domain[x][0]), end="")
             count += 1
     else:
         assigned = define_assigned_vars(board)
+        
+        assignments = backtrack(assigned, board)
+        
+        for domain in board.domain:
+            board.domain[domain] = assigned[d] if len(d) > 1 else board.domain[domain]
 
 
 
