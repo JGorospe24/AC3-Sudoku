@@ -99,21 +99,21 @@ def isConsistent(assignments, var, val, board):
 def assign(assignments, var, val, board):
 
     assignments[var] = val
-    board.forward_check(assignments, var, val)
+    forward_check(board, var, val, assignments)
 
 
 def unassign(assignments, var, board):
 
     if var in assignments:
-        for(D, v) in board.updated[var]:
-            board.domain[D].append(v)
+        for tuple in board.updated[var]:
+            board.domain[tuple[0]].append(tuple[1])
 
-        board.updated = []
+        board.updated[var] = []
         del assignments[var]
 
 
 def forward_check(board, var, value, assignment):
-    for neighbour in board.neighbours:
+    for neighbour in board.neighbours[var]:
         if neighbour not in assignment:
             if value in board.domain[neighbour]:
                 board.domain[neighbour].remove(value)
@@ -133,30 +133,55 @@ def main():
     board = Sudoku(game_board)
 
     if AC3(board):
-        print("Solution Found")
-        # print(board.domain)
-        print("|", end=" ")
-        count = 0
-        row = 0
-        for x in board.domain:
-            if count == 9:
-                count = 0
-                print()  # starts new line
-                row += 1
-                if row == 3 or row == 6:
-                    print()
-                print('|', end='')
-            if count == 3 or count == 6:
-                print("  |", end=" ")
-            print("{}|".format(board.domain[x][0]), end="")
-            count += 1
-    else:
-        assigned = define_assigned_vars(board)
-        
-        assignments = backtrack(assigned, board)
-        
-        for domain in board.domain:
-            board.domain[domain] = assigned[d] if len(d) > 1 else board.domain[domain]
+        isSolved = True
+        for tile in board.variables:
+            if len(board.domain[tile]) > 1:
+                isSolved = False
+
+
+        if(isSolved):
+            print("Solution Found")
+            # print(board.domain)
+            print("|", end=" ")
+            count = 0
+            row = 0
+            for x in board.domain:
+                if count == 9:
+                    count = 0
+                    print()  # starts new line
+                    row += 1
+                    if row == 3 or row == 6:
+                        print()
+                    print('|', end='')
+                if count == 3 or count == 6:
+                    print("  |", end=" ")
+                print("{}|".format(board.domain[x][0]), end="")
+                count += 1
+        else:
+            assigned = define_assigned_vars(board)
+
+            assignments = backtrack(assigned, board)
+
+            for domain in board.domain:
+                board.domain[domain] = assignments[domain] if len(domain) > 1 else board.domain[domain]
+
+            print("Solution Found")
+            # print(board.domain)
+            print("|", end="")
+            count = 0
+            row = 0
+            for x in board.domain:
+                if count == 9:
+                    count = 0
+                    print()  # starts new line
+                    row += 1
+                    if row == 3 or row == 6:
+                        print()
+                    print('|', end='')
+                if count == 3 or count == 6:
+                    print("  |", end="")
+                print("{}|".format(board.domain[x]), end="")
+                count += 1
 
 
 
