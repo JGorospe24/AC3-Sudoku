@@ -15,7 +15,9 @@ class Sudoku:
         self.domain = dict()
         self.neighbours = dict()
         self.constraints = list()
+        self.updated = dict()
         self.init_game(new_board)
+
 
     def init_game(self, new_board):
         
@@ -35,6 +37,8 @@ class Sudoku:
                 self.domain[letter + str((tile_count % 9) + 1)] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             else:
                 self.domain[letter + str((tile_count % 9) + 1)] = [x]
+
+            self.updated[letter + str((tile_count % 9) + 1)] = list()
 
             tile_count += 1
             if (tile_count % 9) == 0:

@@ -1,10 +1,11 @@
 from sudoku import Sudoku
 
+
 def AC3(board):
     # queue of arcs (initially all constraints)
     arc_queue = list(board.constraints)
     while arc_queue:
-        arc1,arc2 = arc_queue.pop(0)
+        arc1, arc2 = arc_queue.pop(0)
         if revise(board, arc1, arc2):
             # check if D1 is = 0, which means no solution
             if not board.domain[arc1]:
@@ -20,59 +21,90 @@ def AC3(board):
 
 # takes board, current_arc[0](x1) and current_arc[1](x2) as parameters
 # returns true iff domain x1 is revised
+
+
 def revise(board, x1, x2):
     revised = False
     # check each value in the domain of x1
     for x in board.domain[x1]:
-        if not any ([x!=y for y in board.domain[x2]]):
+        if not any([x != y for y in board.domain[x2]]):
             board.domain[x1].remove(x)   # delete from domain if true
             revised = True
     return revised
 
-def backtrack(assignments, csp):
-    if len(assignments) == len(csp.variables):
-        return assignments
-    currentVar = minimum_remaining_values(assignments, csp)
-    for v in least_constraining_value(currentVar, csp):
-        if isConsistent(assignments,currentVar, v, csp):
 
-def define_assigned_vars(csp):
+def backtrack(assignments, board):
+    if len(assignments) == len(board.variables):
+        return assignments
+    currentVar = minimum_remaining_values(assignments, board)
+    #for v in least_constraining_value(currentVar, board):
+        #if isConsistent(assignments,currentVar, v, board):
+
+
+def define_assigned_vars(board):
     assigned = dict()
-    for x in csp.variables:
-        if len(csp.domain[x]) == 1:
-            assigned[x] = csp.domain[x][0]
+    for x in board.variables:
+        if len(board.domain[x]) == 1:
+            assigned[x] = board.domain[x][0]
     return assigned
 
-def minimum_remaining_values(assignments, csp):
+
+def minimum_remaining_values(assignments, board):
     unassigned = list()
-    for x in csp.variables:
+    for x in board.variables:
         if x not in assignments:
             unassigned.append(x)
-    min_var = min(unassigned, key=lambda var: len(csp.domain[var]))
+    min_var = min(unassigned, key=lambda var: len(board.domain[var]))
     return min_var
 
-def least_constraining_value(var, csp):
-    if len(csp.domain[var]) == 1:
-        return csp.domain[var]
-    sorted_domain = sorted(csp.domain[var], key=lambda v: constraints(var, v, csp))
+
+def least_constraining_value(var, board):
+    if len(board.domain[var]) == 1:
+        return board.domain[var]
+    sorted_domain = sorted(board.domain[var], key=lambda v: constraints(var, v, board))
     return sorted_domain
 
-def constraints(var, val, csp):
+
+def constraints(var, val, board):
     constraints = 0
-    for x in csp.neighbours[var]:
-        if len(csp.domain[x]) > 1:
-            if x in csp.domain[x]:
+    for x in board.neighbours[var]:
+        if len(board.domain[x]) > 1:
+            if x in board.domain[x]:
                 constraints += 1
     return constraints
 
-def isConsistent(assignments, var, val, csp):
+
+def isConsistent(assignments, var, val, board):
     consistent = True
     for key in assignments:
         if assignments[key] == val:
-            if key in csp.neighbours[var]:
+            if key in board.neighbours[var]:
                 consistent = False
     return consistent
 
+
+def assign(assignments, var, val, board):
+
+    assignments[var] = val
+    board.forward_check(assignments, var, val)
+
+
+def unassign(assignments, var, board):
+
+    if var in assignments:
+        for(D, v) in board.updated[var]:
+            board.domain[D].append(v)
+
+        board.updated = []
+        del assignments[var]
+
+
+def forward_check(board, var, value, assignment):
+    for neighbour in board.neighbours:
+        if neighbour not in assignment:
+            if value in board.domain[neighbour]:
+                board.domain[neighbour].remove(value)
+                board.updated[var].append((neighbour, value))
 
 def main():
     InputFile = open('sudoku.txt')
