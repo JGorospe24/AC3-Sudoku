@@ -22,7 +22,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="md" value="107" />
-          <entry key="py" value="281" />
+          <entry key="py" value="1710" />
           <entry key="txt" value="183" />
         </counts>
       </usages-collector>
@@ -30,7 +30,7 @@
         <counts>
           <entry key="Markdown" value="107" />
           <entry key="PLAIN_TEXT" value="183" />
-          <entry key="Python" value="281" />
+          <entry key="Python" value="1710" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -52,7 +52,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sudoku.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
+            <state relative-caret-position="-92">
               <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
             </state>
           </provider>
@@ -67,8 +67,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor>
-                <caret column="12" selection-start-column="12" selection-end-column="12" />
+              <first_editor relative-caret-position="135">
+                <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
               </first_editor>
               <second_editor />
             </state>
@@ -78,10 +78,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ac3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+            <state relative-caret-position="173">
+              <caret line="36" column="56" lean-forward="true" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
               <folding>
-                <marker date="1541002568118" expanded="true" signature="1129:1136" ph="..." />
+                <marker date="1541009889756" expanded="true" signature="1141:1390" ph="..." />
+                <marker date="1541009889756" expanded="true" signature="1618:1825" ph="..." />
+                <marker date="1541009889756" expanded="true" signature="1864:2487" ph="..." />
               </folding>
             </state>
           </provider>
@@ -224,12 +226,12 @@
     <frame x="10" y="43" width="1260" height="677" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24939467" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24939467" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32991454" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32991454" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -257,8 +259,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="12" selection-start-column="12" selection-end-column="12" />
+          <first_editor relative-caret-position="135">
+            <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
           </first_editor>
           <second_editor />
         </state>
@@ -266,17 +268,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sudoku.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
+        <state relative-caret-position="-92">
           <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ac3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        <state relative-caret-position="173">
+          <caret line="36" column="56" lean-forward="true" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
           <folding>
-            <marker date="1541002568118" expanded="true" signature="1129:1136" ph="..." />
+            <marker date="1541009889756" expanded="true" signature="1141:1390" ph="..." />
+            <marker date="1541009889756" expanded="true" signature="1618:1825" ph="..." />
+            <marker date="1541009889756" expanded="true" signature="1864:2487" ph="..." />
           </folding>
         </state>
       </provider>
