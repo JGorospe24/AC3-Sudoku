@@ -5,8 +5,6 @@ def AC3(board):
     arc_queue = list(board.constraints)
     while arc_queue:
         arc1,arc2 = arc_queue.pop(0)
-        
-        
         if revise(board, arc1, arc2):
             # check if D1 is = 0, which means no solution
             if not board.domain[arc1]:
@@ -20,7 +18,6 @@ def AC3(board):
                 arc_queue.append(temp_list)
     return True
 
-
 # takes board, current_arc[0](x1) and current_arc[1](x2) as parameters
 # returns true iff domain x1 is revised
 
@@ -28,12 +25,13 @@ def revise(board, x1, x2):
     revised = False
     # check each value in the domain of x1
     for x in board.domain[x1]:
-        
-        
         if not any ([x!=y for y in board.domain[x2]]):
             board.domain[x1].remove(x)   # delete from domain if true
             revised = True
     return revised
+
+def backtrack(csp):
+
 
 def main():
     InputFile = open('sudoku.txt')
@@ -48,16 +46,6 @@ def main():
     # Create the sudoku object
     board = Sudoku(game_board)
 
-    # Print properties for debugging
-    
-    # or x in board.domain:
-    #   print(x + ": ", end='')
-    #    print(board.domain[x])
-    # board.create_constraints() #Just for testing right now
-    
-    # board.create_neighbours()
-    
-    # print(board.neighbours)
     if not AC3(board):
         print("No Solution Found")
     else:
@@ -78,9 +66,6 @@ def main():
                 print("  |", end="")
             print("{}|".format(board.domain[x][0]), end="")
             count += 1
-
-
-
 
 if __name__ == '__main__':
     main()
