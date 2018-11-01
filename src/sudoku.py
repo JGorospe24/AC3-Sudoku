@@ -55,9 +55,7 @@ class Sudoku:
     # A7: [6]
 
     def create_variables(self, numbers, characters):
-
         # Creates an empty list which will be populated by the tiles of the board
-
         for char in characters:
             for num in numbers:
                 self.variables.append(char + num)

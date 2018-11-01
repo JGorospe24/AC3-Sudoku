@@ -152,10 +152,10 @@ def main():
                     row += 1
                     if row == 3 or row == 6:
                         print()
-                    print('|', end = "")
+                    print('|', end='')
                 if count == 3 or count == 6:
-                    print("  |",end="" )
-                print("{}|".format(board.domain[x][0]))
+                    print("  |", end="")
+                print("{}|".format(board.domain[x][0]), end="")
                 count += 1
         else:
             assigned = define_assigned_vars(board)
@@ -168,7 +168,7 @@ def main():
         
             print("Solution Found")
             # print(board.domain)
-            print("|",end="" )
+            print("|", end = "" )
             count = 0
             row = 0
             for x in board.domain:
@@ -178,12 +178,11 @@ def main():
                     row += 1
                     if row == 3 or row == 6:
                         print()
-                    print('|', end="")
+                    print('|', end='')
                 if count == 3 or count == 6:
-                    print("  |",end="")
-                print("{}|".format(board.domain[x]), end="" )
+                    print("  |", end="")
+                print("{}|".format(board.domain[x][0]), end="")
                 count += 1
-
                     
 if __name__ == '__main__':
     main()
