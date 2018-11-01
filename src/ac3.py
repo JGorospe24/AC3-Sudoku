@@ -54,8 +54,7 @@ def backtrack(assignments, board):
             if solution:
                 return solution
             unassign(assignments, currentVar, board)   
-            
-    
+
     return False
 
 def define_assigned_vars(board):
@@ -65,6 +64,8 @@ def define_assigned_vars(board):
             assigned[x] = board.domain[x][0]
     return assigned
 
+#the minimum remaining values heuristic
+#Gets the unassigned value with the fewest legal values
 def minimum_remaining_values(assignments, board):
     unassigned = list()
     for x in board.variables:
@@ -73,12 +74,15 @@ def minimum_remaining_values(assignments, board):
     min_var = min(unassigned, key=lambda tile: len(board.domain[tile]))
     return min_var
 
+#the least constraining value heuristic
+#chooses the VALUE that rules out the fewest choices for neighbouring tiles
 def least_constraining_value(tile, board):
     if len(board.domain[tile]) == 1:
         return board.domain[tile]
     sorted_domain = sorted(board.domain[tile], key=lambda v: constraints(tile, v, board))
     return sorted_domain
 
+#Function to count the amount of constraints that a given value would induce with the neighbours of a variable that we're assigning a value on
 def constraints(tile, value, board):
     constraints = 0
     for x in board.neighbours[tile]:
@@ -87,6 +91,7 @@ def constraints(tile, value, board):
                 constraints += 1
     return constraints
 
+#Checks whether the assignment of a variable results in a consistent board
 def isConsistent(assignments, tile, value, board):
     consistent = True
     for key in assignments:
@@ -107,7 +112,7 @@ def unassign(assignments, tile, board):
         board.updated[tile] = list()
         del assignments[tile]
 
-
+#Perform forward checking, check neighbours of a variable and update their domains with respect to the assignment of a variable
 def forward_check(board, tile, value, assignment):
     for neighbour in board.neighbours[tile]:
         if neighbour not in assignment:

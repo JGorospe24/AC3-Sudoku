@@ -9,7 +9,7 @@ numbers = '123456789'
 # Sudoku Class
 # Creates an 9x9 board of 81 tiles
 class Sudoku:
-
+    # constructor class, instantiates properties
     def __init__(self, new_board):
         self.variables = list()
         self.domain = dict()
@@ -18,6 +18,7 @@ class Sudoku:
         self.updated = dict()
         self.init_game(new_board)
 
+    #Calls the functions that performs permutations and combinations
     def init_game(self, new_board):
         
         self.create_variables(numbers, characters)
