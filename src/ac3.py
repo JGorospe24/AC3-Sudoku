@@ -152,7 +152,7 @@ def main():
                     row += 1
                     if row == 3 or row == 6:
                         print()
-                    print('|')
+                    print('|', end = "")
                 if count == 3 or count == 6:
                     print("  |",end="" )
                 print("{}|".format(board.domain[x][0]))
@@ -178,7 +178,7 @@ def main():
                     row += 1
                     if row == 3 or row == 6:
                         print()
-                    print('|', end='')
+                    print('|', end="")
                 if count == 3 or count == 6:
                     print("  |",end="")
                 print("{}|".format(board.domain[x]), end="" )
