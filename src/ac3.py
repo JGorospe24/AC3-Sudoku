@@ -19,8 +19,8 @@ def AC3(board):
                 arc_queue.append(temp_list)
     return True
 
-# takes board, current_arc[0](x1) and current_arc[1](x2) as parameters
-# returns true iff domain x1 is revised
+# takes board, current_arc[0](a) and current_arc[1](b) as parameters
+# returns true iff domain b is revised
 def revise(board, a, b):
     revised = False
     # check each value in the domain of x1
@@ -181,7 +181,7 @@ def main():
                     print('|', end='')
                 if count == 3 or count == 6:
                     print("  |", end="")
-                print("{}|".format(board.domain[x][0]), end="")
+                print("{}|".format(board.domain[x]), end="")
                 count += 1
                     
 if __name__ == '__main__':
