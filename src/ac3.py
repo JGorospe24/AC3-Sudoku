@@ -5,17 +5,17 @@ def AC3(board):
     # queue of arcs (initially all constraints)
     arc_queue = list(board.constraints)
     while arc_queue:
-        arc1, arc2 = arc_queue.pop(0)
-        if revise(board, arc1, arc2):
+        currentArc = arc_queue.pop(0)
+        if revise(board, currentArc[0], currentArc[1]):
             # check if D1 is = 0, which means no solution
-            if not board.domain[arc1]:
+            if not board.domain[currentArc[0]]:
                 return False
             # else for each neighbour of
-            for neighbours in board.neighbours[arc1]:
+            for neighbours in board.neighbours[currentArc[0]]:
                 # will skip if x2 is found as we do not need this value appended
-                if neighbours == arc2:
+                if neighbours ==  currentArc[1]:
                     continue
-                temp_list = [neighbours, arc1]
+                temp_list = [neighbours, currentArc[0]]
                 arc_queue.append(temp_list)
     return True
 
@@ -142,7 +142,7 @@ def main():
         if(isSolved):
             print("Solution Found")
             # print(board.domain)
-            print("|", end=" ")
+            print("|", end = "" )
             count = 0
             row = 0
             for x in board.domain:
@@ -152,10 +152,10 @@ def main():
                     row += 1
                     if row == 3 or row == 6:
                         print()
-                    print('|', end='')
+                    print('|')
                 if count == 3 or count == 6:
-                    print("  |", end=" ")
-                print("{}|".format(board.domain[x][0]), end="")
+                    print("  |",end="" )
+                print("{}|".format(board.domain[x][0]))
                 count += 1
         else:
             assigned = define_assigned_vars(board)
@@ -168,7 +168,7 @@ def main():
         
             print("Solution Found")
             # print(board.domain)
-            print("|", end="")
+            print("|",end="" )
             count = 0
             row = 0
             for x in board.domain:
@@ -180,8 +180,8 @@ def main():
                         print()
                     print('|', end='')
                 if count == 3 or count == 6:
-                    print("  |", end="")
-                print("{}|".format(board.domain[x]), end="")
+                    print("  |",end="")
+                print("{}|".format(board.domain[x]), end="" )
                 count += 1
 
                     
